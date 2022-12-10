@@ -1,8 +1,8 @@
 import math
-from personalSinParser import psrp
+from radianParser import radianParser
 
 def sin(x):
-    x = psrp(x)
+    x = radianParser(x)
     x %= math.pi
     #print(x)
     i = 1
