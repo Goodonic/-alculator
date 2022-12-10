@@ -2,25 +2,33 @@ from sin import sin
 from cos import cos
 from tg import tg
 from ctg import ctg
+import math
 
 OPERATORS = {'+': (1, lambda x, y: x + y), '-': (1, lambda x, y: x - y),
              '*': (2, lambda x, y: x * y), '/': (2, lambda x, y: x / y),
-             's': (4, lambda x: sin(x)), 'c' : (4, lambda x:cos(x)), 't':(4, lambda x: tg(x)), 'C':(4, lambda x: ctg(x))}  # Числа - приоритет выполнения
+             's': (4, lambda x: sin(x)), 'c': (4, lambda x:cos(x)),
+             't': (4, lambda x: tg(x)), 'C': (4, lambda x: ctg(x))}  # Числа - приоритет выполнения
 
 
 def myEval(formula):
     def parse(formula_string):
         number = ''
         for s in formula_string:
-            if s in '1234567890.':  # Если символ цифра - собираем число
+            if s in '1234567890p.':  # Если символ цифра - собираем число
                 number += s
             elif number:  # Если символ не цифра, то выдаём собранное число и начинаем собирать заново
-                yield float(number)
+                if number != 'p':
+                    yield float(number)  # Если в конце строки есть число мы его выдаем
+                else:
+                    yield math.pi
                 number = ''
             if s in OPERATORS or s in "()":  # Если символ  - оператор или скобка
                 yield s
         if number:
-            yield float(number)  # Если в конце строки есть число мы его выдаем
+            if number != 'p':
+                yield float(number)  # Если в конце строки есть число мы его выдаем
+            else:
+                yield math.pi
 
     def shunting_yard(parsed_formula):
         stack = []
@@ -55,7 +63,9 @@ def myEval(formula):
                 if token != 'c' and token != 'C' and token != 's' and token != 't':
                     y, x = stack.pop(), stack.pop()
                     stack.append(OPERATORS[token][1](x, y))  # Вызываем функцию из списка операторов
-                else: pass
+                else:
+                    x = stack.pop()
+                    stack.append(OPERATORS[token][1](x))
             else:
                 stack.append(token)
 
@@ -63,4 +73,4 @@ def myEval(formula):
 
     return calc(shunting_yard(parse(formula)))
 
-print(myEval("1"))
+print(myEval("s(p/2)+1/(2*5)-c(p)+t(2*p)+C(p/4)"))

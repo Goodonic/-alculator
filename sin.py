@@ -4,7 +4,7 @@ from personalSinParser import psrp
 def sin(x):
     x = psrp(x)
     x %= math.pi
-    print(x)
+    #print(x)
     i = 1
     lasts = 0
     s = x
@@ -19,4 +19,4 @@ def sin(x):
         s += num / fact * sign
     return s
 
-print('sin',sin('10*p/2'))
+#print('sin',sin('10*p/2'))

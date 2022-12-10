@@ -1,7 +1,7 @@
 import math
 def psrp(formula_string):
     res = ''
-    for i in formula_string:
+    for i in str(formula_string):
         if i != 'p':
             res += i
         else:
