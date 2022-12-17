@@ -9,13 +9,13 @@ def sin(x):
     lasts = 0
     s = x
     num = x
-    sign = 1
+    pm = 1
     while s != lasts:
         lasts = s
         i += 2
         fact = math.factorial(i)
         num *= x * x
-        sign *= -1
+        pm *= -1
         s += num / fact * sign
     return round(s)
 
