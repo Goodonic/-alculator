@@ -183,6 +183,7 @@ class MainWindow(QWidget):
     def pi(self):
         self.formula += 'p'
         self.visibleFormula += 'p'
+        self.line.setText(self.visibleFormula)
     def remove(self):
         self.formula = self.formula[:-1]
         self.visibleFormula = self.visibleFormula[:-1]

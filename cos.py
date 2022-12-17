@@ -7,8 +7,8 @@ def cos(x):
     i = 0
     if x > 2 * math.pi:
         x = x % (2 * math.pi)
-    if x == math.pi / 2:
-        return 0
+    # if x == math.pi / 2:
+    #     return 0
     else:
         lasts = 0
         s = 1
@@ -21,6 +21,6 @@ def cos(x):
             num *= x ** 2
             pm *= -1
             s += num / fact * pm
-        return s
+        return round(s)
 
 #print('cos',cos('30'))

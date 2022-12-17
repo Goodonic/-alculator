@@ -3,7 +3,7 @@ from radianParser import radianParser
 
 def sin(x):
     x = radianParser(x)
-    x %= math.pi
+    x %= math.pi*2
     #print(x)
     i = 1
     lasts = 0
@@ -17,6 +17,6 @@ def sin(x):
         num *= x * x
         sign *= -1
         s += num / fact * sign
-    return s
+    return round(s)
 
 #print('sin',sin('10*p/2'))
